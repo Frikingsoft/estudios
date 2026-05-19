@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Estudios OS — Edición Futurista | AI Assistant</title>
-  <!-- Google Fonts & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Estudios OS — Edición Futurista | El sistema del mañana</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -16,606 +16,543 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 20% 30%, #0a0f1e, #03050b);
-      color: #eef5ff;
-      height: 100vh;
-      overflow: hidden;
-      backdrop-filter: blur(2px);
+      background: radial-gradient(circle at 10% 20%, #0a0f1f, #020408);
+      color: #edf4ff;
+      scroll-behavior: smooth;
     }
 
-    /* Glassmorphism + futurista */
-    .glass-panel {
-      background: rgba(12, 20, 35, 0.55);
-      backdrop-filter: blur(14px);
-      border-radius: 32px;
+    /* glass morphism utilities */
+    .glass {
+      background: rgba(12, 25, 45, 0.55);
+      backdrop-filter: blur(12px);
       border: 1px solid rgba(0, 255, 255, 0.2);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(0, 255, 255, 0.1);
-      transition: all 0.2s ease;
+      border-radius: 2rem;
     }
 
-    /* Layout Grid */
-    .dashboard {
-      display: grid;
-      grid-template-columns: 280px 1fr 300px;
-      gap: 20px;
-      height: 100vh;
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    /* Scroll personalizado */
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #0ff;
-      border-radius: 10px;
-    }
-
-    /* Sidebar izquierda */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      overflow-y: auto;
-      padding: 24px 16px;
-    }
-
-    .logo h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #aaffff, #4affb5);
+    .neon-text {
+      background: linear-gradient(135deg, #a0f0ff, #5effbc);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: -0.5px;
-    }
-    .logo span {
-      font-size: 0.7rem;
-      color: #8aaee0;
-      display: block;
     }
 
-    .user-card {
-      background: rgba(0, 20, 40, 0.6);
-      border-radius: 24px;
-      padding: 16px;
-      border-left: 3px solid #0ff;
-    }
-    .user-card i {
-      font-size: 2rem;
-      color: #0ff;
-    }
-    .user-card h4 {
-      font-weight: 500;
-    }
-
-    .search-bar {
-      background: rgba(0,0,0,0.4);
-      border-radius: 40px;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid rgba(0,255,255,0.3);
-    }
-    .search-bar i {
-      color: #0ff;
-    }
-    .search-bar input {
-      background: transparent;
+    .btn-primary {
+      background: linear-gradient(95deg, #00c6ff, #00ffb3);
       border: none;
-      color: white;
-      outline: none;
-      width: 100%;
+      padding: 0.8rem 1.8rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      color: #01051a;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0,255,200,0.3);
+    }
+    .btn-primary:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px cyan;
     }
 
-    .menu-categories {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 12px;
-      border-radius: 16px;
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #0ff;
+      color: #0ff;
+      padding: 0.7rem 1.6rem;
+      border-radius: 2rem;
+      font-weight: 500;
       transition: 0.2s;
       cursor: pointer;
-      color: #bdd4ff;
     }
-    .menu-item:hover, .menu-item.active {
-      background: rgba(0, 255, 255, 0.15);
-      color: #0ff;
-      box-shadow: 0 0 6px rgba(0,255,255,0.3);
-    }
-    .menu-item i {
-      width: 24px;
+    .btn-outline:hover {
+      background: rgba(0,255,255,0.15);
+      box-shadow: 0 0 8px cyan;
     }
 
-    /* Columna central */
-    .main-area {
+    /* Header / Nav */
+    nav {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
-      overflow-y: auto;
-      padding-right: 6px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      backdrop-filter: blur(12px);
+      background: rgba(2, 8, 18, 0.7);
+      border-bottom: 1px solid rgba(0,255,200,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 14px;
+    .logo h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
     }
-    .app-card {
-      background: rgba(18, 28, 45, 0.7);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      padding: 14px 8px;
-      text-align: center;
-      transition: all 0.25s;
-      border: 1px solid rgba(0,255,200,0.2);
-      cursor: pointer;
+    .nav-links {
+      display: flex;
+      gap: 2rem;
     }
-    .app-card i {
-      font-size: 2rem;
-      color: #0ff;
-      margin-bottom: 8px;
-    }
-    .app-card p {
-      font-size: 0.7rem;
+    .nav-links a {
+      color: #ccf4ff;
+      text-decoration: none;
       font-weight: 500;
+      transition: 0.2s;
     }
-    .app-card span {
-      font-size: 0.6rem;
-      color: #86a9d4;
-    }
-    .app-card:hover {
-      transform: translateY(-4px);
-      border-color: #0ff;
-      background: rgba(0, 255, 255, 0.1);
-      box-shadow: 0 8px 20px rgba(0, 200, 255, 0.2);
+    .nav-links a:hover {
+      color: #0ff;
+      text-shadow: 0 0 5px cyan;
     }
 
-    /* AI ASSISTANT CARD */
-    .ai-assistant {
-      margin-top: 8px;
-      background: rgba(8, 16, 30, 0.7);
-      border-radius: 28px;
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 255, 200, 0.4);
-      overflow: hidden;
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 1.5rem auto;
+      opacity: 0.9;
+    }
+    .hero-buttons {
       display: flex;
-      flex-direction: column;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .ai-header {
-      padding: 18px 20px;
-      background: linear-gradient(90deg, #0a142e, #021a2b);
-      border-bottom: 1px solid #0ff33a30;
+
+    /* secciones comunes */
+    section {
+      padding: 4rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
     }
-    .ai-header h3 i {
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .section-title i {
       color: #0ff;
-      margin-right: 8px;
+      margin-right: 12px;
     }
-    .chat-container {
-      height: 260px;
-      overflow-y: auto;
-      padding: 16px;
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: rgba(10, 20, 35, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(0,255,210,0.2);
+      transition: 0.2s;
+    }
+    .feature-card i {
+      font-size: 2.5rem;
+      color: #0ff;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      margin-bottom: 0.8rem;
+    }
+
+    /* App Store Preview */
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .app-item {
+      background: rgba(0, 20, 40, 0.6);
+      border-radius: 1.5rem;
+      padding: 1.2rem 0.8rem;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      transition: 0.2s;
+      border: 1px solid rgba(0,255,200,0.2);
+    }
+    .app-item i {
+      font-size: 2.4rem;
+      color: #0ff;
+    }
+    .app-item h4 {
+      margin: 10px 0 5px;
+    }
+    .app-item span {
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+    .app-item:hover {
+      transform: translateY(-6px);
+      border-color: cyan;
+      box-shadow: 0 10px 20px rgba(0,200,255,0.2);
+    }
+
+    /* AI Assistant + Report */
+    .ai-container {
+      background: rgba(5, 15, 30, 0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      padding: 2rem;
+      border: 1px solid #0ff66a30;
+      margin: 2rem 0;
+    }
+    .ai-chat {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 1.5rem;
+      padding: 1rem;
+      max-height: 280px;
+      overflow-y: auto;
     }
     .message {
       display: flex;
       gap: 10px;
-      animation: fadeInUp 0.2s;
+      margin-bottom: 10px;
     }
     .message.user {
       justify-content: flex-end;
     }
-    .message.bubble {
-      max-width: 80%;
-      padding: 10px 14px;
+    .message .bubble {
+      max-width: 75%;
+      padding: 10px 15px;
       border-radius: 20px;
       font-size: 0.85rem;
-      line-height: 1.4;
     }
     .message.user .bubble {
-      background: #0ff22a20;
-      border: 1px solid #0ff;
-      color: #e0f0ff;
+      background: #0ff33a20;
+      border: 1px solid cyan;
       border-radius: 20px 4px 20px 20px;
     }
     .message.ai .bubble {
-      background: rgba(30, 40, 70, 0.8);
+      background: #10243e;
       border: 1px solid #2affb0;
       border-radius: 4px 20px 20px 20px;
     }
-    .chat-input-area {
+    .chat-input {
       display: flex;
-      padding: 12px 16px;
-      gap: 8px;
-      border-top: 1px solid rgba(0,255,200,0.2);
-      background: #04121f60;
+      gap: 10px;
+      margin-top: 1rem;
     }
-    .chat-input-area input {
+    .chat-input input {
       flex: 1;
-      background: #0a1225;
+      background: #0a1428;
       border: 1px solid #0ff;
       border-radius: 40px;
-      padding: 10px 16px;
+      padding: 10px 18px;
       color: white;
       outline: none;
     }
-    .chat-input-area button {
-      background: #0ff22a30;
-      border: none;
-      border-radius: 40px;
-      padding: 0 18px;
-      color: #0ff;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
+    .report-area {
+      background: #010b1b;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      margin-top: 1.5rem;
+      border-left: 5px solid cyan;
+      max-height: 300px;
+      overflow-y: auto;
     }
-    .chat-input-area button:hover {
-      background: #0ff;
-      color: #010514;
-      box-shadow: 0 0 8px cyan;
-    }
-    .generate-btn {
-      background: linear-gradient(95deg, #00c9ff, #00ffb3);
-      margin: 12px 16px 16px auto;
-      width: fit-content;
-      padding: 8px 20px;
-      border: none;
-      border-radius: 40px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-      color: #010514;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .generate-btn:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 15px cyan;
+    .report-area h4 {
+      color: cyan;
+      margin-bottom: 12px;
     }
 
-    .scheme-report-area {
-      margin: 0 16px 16px 16px;
-      background: #010b17aa;
-      border-radius: 24px;
-      padding: 16px;
-      border-left: 4px solid cyan;
-      max-height: 220px;
-      overflow-y: auto;
-      font-size: 0.8rem;
+    /* Bug report form */
+    .bug-form {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 2rem;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 80, 120, 0.3);
     }
-    .scheme-report-area h4 {
-      color: #0ff;
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
       margin-bottom: 8px;
+      font-weight: 500;
     }
-    .scheme-report-area ul {
-      padding-left: 20px;
-      margin: 6px 0;
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: #0f1a2c;
+      border: 1px solid #445c7e;
+      border-radius: 1rem;
+      padding: 12px 16px;
+      color: white;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
     }
-    hr {
-      border-color: #0ff33a40;
-      margin: 8px 0;
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #0ff;
+      box-shadow: 0 0 6px cyan;
     }
-
-    /* Panel derecho (stats, notificaciones) */
-    .right-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      overflow-y: auto;
+    .submit-bug {
+      background: linear-gradient(95deg, #ff416c, #ff4b2b);
+      border: none;
+      color: white;
     }
-    .stat-card, .network-card, .activity-card, .notif-card {
-      background: rgba(10, 22, 40, 0.6);
+    .toast-msg {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0a0f1f;
       backdrop-filter: blur(8px);
-      border-radius: 24px;
-      padding: 16px;
+      padding: 12px 24px;
+      border-radius: 40px;
+      border-left: 6px solid #0ff;
+      z-index: 1000;
+      font-weight: 500;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
     }
-    .stat-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 10px 0;
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(0,255,200,0.2);
+      margin-top: 2rem;
     }
-    .progress-bar {
-      background: #1e2a3a;
-      height: 6px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #0ff, #4affb5);
-    }
-    .activity-list p i {
-      width: 28px;
-      color: #0ff;
-    }
-    .notif-card .notif {
-      border-left: 3px solid cyan;
-      padding-left: 12px;
-      margin: 12px 0;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(8px);}
-      to { opacity: 1; transform: translateY(0);}
-    }
-    .badge {
-      background: #0ff22a20;
-      border-radius: 30px;
-      padding: 2px 8px;
-      font-size: 0.7rem;
-    }
-    time {
-      font-size: 0.7rem;
-      color: #9ac2e0;
+    @media (max-width: 800px) {
+      .hero h1 { font-size: 2.5rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 2rem 5%; }
     }
   </style>
 </head>
 <body>
-<div class="dashboard">
-  <!-- SIDEBAR IZQUIERDA -->
-  <div class="sidebar glass-panel">
-    <div class="logo">
-      <h1>ESTUDIOS</h1>
-      <span>EDICIÓN FUTURISTA — LNX</span>
-    </div>
-    <div class="user-card">
-      <i class="fas fa-user-astronaut"></i>
-      <h4>estudio@futuros</h4>
-      <p><i class="fas fa-circle" style="font-size: 0.6rem; color:#0f0;"></i> Activo</p>
-    </div>
-    <div class="search-bar">
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Buscar aplicaciones...">
-    </div>
-    <div class="menu-categories">
-      <div class="menu-item active"><i class="fas fa-star"></i> FAVORITAS</div>
-      <div class="menu-item"><i class="fas fa-th-large"></i> TODAS</div>
-      <div class="menu-item"><i class="fas fa-microchip"></i> SISTEMA</div>
-      <div class="menu-item"><i class="fas fa-code"></i> DESARROLLO</div>
-      <div class="menu-item"><i class="fas fa-film"></i> MULTIMEDIA</div>
-      <div class="menu-item"><i class="fas fa-sliders-h"></i> CONFIGURACIÓN</div>
-      <div class="menu-item"><i class="fas fa-power-off"></i> APAGAR</div>
-    </div>
-    <div style="margin-top: auto; font-size:0.7rem; opacity:0.6; text-align:center;">v1.0 · AI core active</div>
+
+<nav>
+  <div class="logo"><h2 class="neon-text">Estudi <span style="font-size:2rem;">OS</span></h2></div>
+  <div class="nav-links">
+    <a href="#features">Características</a>
+    <a href="#store">Tienda</a>
+    <a href="#ai-assistant">AI Yarbis</a>
+    <a href="#bug-report">Reporte Fallos</a>
   </div>
+</nav>
 
-  <!-- COLUMNA CENTRAL: APPS + AI ASISTENTE -->
-  <div class="main-area">
-    <div class="apps-grid">
-      <div class="app-card"><i class="fas fa-globe"></i><p>Navegador Web</p><span>Navega por Internet</span></div>
-      <div class="app-card"><i class="fas fa-terminal"></i><p>Terminal</p><span>Línea de comandos</span></div>
-      <div class="app-card"><i class="fas fa-folder-open"></i><p>Gestor Archivos</p><span>Explora tus archivos</span></div>
-      <div class="app-card"><i class="fas fa-cog"></i><p>Configuración</p><span>Personaliza el sistema</span></div>
-      <div class="app-card"><i class="fas fa-edit"></i><p>Editor de Texto</p><span>Edita código y docs</span></div>
-      <div class="app-card"><i class="fas fa-store"></i><p>Tienda Software</p><span>Instala apps</span></div>
-      <div class="app-card"><i class="fas fa-question-circle"></i><p>Ayuda</p><span>Soporte documentación</span></div>
-    </div>
-
-    <!-- ASISTENTE IA (core: esquemas + reportes) -->
-    <div class="ai-assistant">
-      <div class="ai-header">
-        <h3><i class="fas fa-robot"></i> AI: Asistente Nexus · Esquema & Reporte</h3>
-        <p style="font-size:0.7rem">Conversa sobre cualquier tema. Luego genera un esquema jerárquico + informe detallado.</p>
-      </div>
-      <div class="chat-container" id="chatContainer">
-        <!-- mensajes dinámicos -->
-      </div>
-      <div class="chat-input-area">
-        <input type="text" id="chatInput" placeholder="Habla sobre tus temas de estudio, proyectos, ideas..." autocomplete="off">
-        <button id="sendMsgBtn"><i class="fas fa-paper-plane"></i> Enviar</button>
-      </div>
-      <button id="generateReportBtn" class="generate-btn"><i class="fas fa-brain"></i> Generar Esquema y Reporte IA</button>
-      <div class="scheme-report-area" id="schemeReportArea">
-        <div style="text-align:center; opacity:0.7;"><i class="fas fa-lightbulb"></i> El esquema y reporte aparecerán aquí tras generar.</div>
-      </div>
+<main>
+  <!-- Hero -->
+  <div class="hero">
+    <h1><span class="neon-text">EstudiOS</span> — Edición Futurista</h1>
+    <p>El sistema operativo que aprende contigo. Fluidez total, IA integrada y un ecosistema de aplicaciones diseñado para creadores, desarrolladores y visionarios.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary"><i class="fas fa-download"></i> Descargar ISO</button>
+      <button class="btn-outline"><i class="fas fa-play-circle"></i> Demo en vivo</button>
     </div>
   </div>
 
-  <!-- PANEL DERECHO: SISTEMA / RED / ACTIVIDAD / NOTIFICACIONES -->
-  <div class="right-panel">
-    <div class="stat-card glass-panel">
-      <h4><i class="fas fa-tachometer-alt"></i> SISTEMA</h4>
-      <div class="stat-item"><span>CPU</span><span id="cpuVal">10%</span></div><div class="progress-bar"><div class="progress-fill" id="cpuFill" style="width:10%"></div></div>
-      <div class="stat-item"><span>RAM</span><span id="ramVal">25%</span></div><div class="progress-bar"><div class="progress-fill" id="ramFill" style="width:25%"></div></div>
-      <div class="stat-item"><span>GPU</span><span id="gpuVal">38%</span></div><div class="progress-bar"><div class="progress-fill" id="gpuFill" style="width:38%"></div></div>
-      <div class="stat-item"><span><i class="fas fa-microchip"></i> 2.2 GHz</span><span>3.9/155 GB</span></div>
-      <div class="stat-item"><span><i class="fas fa-hdd"></i> Disco</span><span>89/236 GB</span></div>
+  <!-- Features Section -->
+  <section id="features">
+    <h2 class="section-title"><i class="fas fa-microchip"></i> Potencia sin límites</h2>
+    <div class="features-grid">
+      <div class="feature-card"><i class="fas fa-brain"></i><h3>Asistente IA Yarbis</h3><p>Convierte conversaciones en esquemas de estudio y reportes ejecutivos. Ideal para estudiantes y profesionales.</p></div>
+      <div class="feature-card"><i class="fas fa-store"></i><h3>Estudios Store</h3><p>Tienda de aplicaciones curada con las mejores herramientas de diseño, desarrollo y productividad.</p></div>
+      <div class="feature-card"><i class="fas fa-shield-alt"></i><h3>Seguridad Cuántica</h3><p>Cifrado de siguiente generación, sandboxing y kernel reforzado.</p></div>
+      <div class="feature-card"><i class="fas fa-sync-alt"></i><h3>Actualizaciones Live</h3><p>Sistema inmutable con rollbacks instantáneos. Sin temor a errores.</p></div>
     </div>
-    <div class="network-card glass-panel">
-      <h4><i class="fas fa-wifi"></i> RED</h4>
-      <p><i class="fas fa-check-circle" style="color:#0f0;"></i> Conectado · 127.0.0.1</p>
-      <p><i class="fas fa-signal"></i> Wifi - 5G | IPSec activo</p>
+  </section>
+
+  <!-- App Store Preview (Tienda de aplicaciones) -->
+  <section id="store">
+    <h2 class="section-title"><i class="fas fa-store"></i> Estudios Store — Aplicaciones destacadas</h2>
+    <div class="store-grid">
+      <div class="app-item"><i class="fab fa-firefox"></i><h4>Navegador Yarbis</h4><span>Web 3.0 integrado</span></div>
+      <div class="app-item"><i class="fas fa-terminal"></i><h4>Terminal Hyperion</h4><span>IA predictiva en CLI</span></div>
+      <div class="app-item"><i class="fas fa-paintbrush"></i><h4>Estudios Design</h4><span>UI/UX avanzada</span></div>
+      <div class="app-item"><i class="fas fa-code"></i><h4>CodeForge</h4><span>IDE con asistente</span></div>
+      <div class="app-item"><i class="fas fa-video"></i><h4>Media Sync</h4><span>Edición 8K</span></div>
+      <div class="app-item"><i class="fas fa-database"></i><h4>Data Mind</h4><span>Analítica ML</span></div>
+      <div class="app-item"><i class="fas fa-gamepad"></i><h4>Quantum Play</h4><span>Juegos nube</span></div>
+      <div class="app-item"><i class="fas fa-cloud-upload-alt"></i><h4>Backup Astral</h4><span>Copias en cadena</span></div>
     </div>
-    <div class="activity-card glass-panel">
-      <h4>ACTIVIDAD <i class="fas fa-chart-line"></i></h4>
-      <div class="activity-list">
-        <p><i class="fab fa-firefox-browser"></i> firefox <span style="float:right;">1.2%</span></p>
-        <p><i class="fas fa-code"></i> code <span style="float:right;">0.0%</span></p>
-        <p><i class="fas fa-cogs"></i> systemd <span style="float:right;">0.5%</span></p>
-        <p><i class="fab fa-gnome"></i> gnome.shell <span style="float:right;">0.3%</span></p>
-        <p><i class="fas fa-folder"></i> nautilus <span style="float:right;">0.2%</span></p>
+    <div style="text-align: center;"><button class="btn-outline">Ver todas las apps <i class="fas fa-arrow-right"></i></button></div>
+  </section>
+
+  <!-- AI Assistant Section: Esquema + Reporte -->
+  <section id="ai-assistant">
+    <h2 class="section-title"><i class="fas fa-robot"></i> AI Yarbis: genera esquemas y reportes</h2>
+    <div class="ai-container">
+      <p style="margin-bottom: 12px;"><i class="fas fa-comment-dots"></i> Conversa con la IA sobre cualquier tema (programación, ciencia, filosofía, proyectos). Luego crea un <strong>esquema jerárquico</strong> y un <strong>reporte personalizado</strong> basado en la charla.</p>
+      <div class="ai-chat" id="chatContainer"></div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ejemplo: Quiero estudiar machine learning y sus aplicaciones en medicina..." autocomplete="off">
+        <button id="sendChatBtn" class="btn-primary" style="padding: 0 1.2rem;"><i class="fas fa-paper-plane"></i> Enviar</button>
       </div>
-      <div class="badge" style="margin-top:8px;"><i class="fas fa-chart-simple"></i> VER MÁS</div>
-    </div>
-    <div class="notif-card glass-panel">
-      <h4><i class="fas fa-bell"></i> NOTIFICACIONES <span id="currentTime" style="float:right;"></span></h4>
-      <div class="notif">
-        <i class="fas fa-sync-alt"></i> Actualización disponible<br>
-        <small>Hay 12 actualizaciones listas para instalar.</small>
+      <div style="display: flex; justify-content: flex-end; margin: 1rem 0 0.5rem;">
+        <button id="generateReportBtn" class="btn-primary" style="background: linear-gradient(95deg,#aa4eff,#5f9eff);"><i class="fas fa-chalkboard-user"></i> Generar Esquema + Reporte IA</button>
       </div>
-      <div class="notif">
-        <i class="fas fa-microchip"></i> AI Assistant: Nueva versión de esquemas.<br>
-        <small>Prueba la generación semántica.</small>
+      <div class="report-area" id="reportArea">
+        <div style="opacity:0.6;"><i class="fas fa-lightbulb"></i> Al presionar el botón, se analizará la conversación y aparecerá aquí el esquema temático y el informe.</div>
       </div>
-      <div class="badge">VER DETALLES</div>
     </div>
-  </div>
-</div>
+  </section>
+
+  <!-- Bug Report Section -->
+  <section id="bug-report">
+    <h2 class="section-title"><i class="fas fa-bug"></i> Reporte de fallos — Ayúdanos a mejorar</h2>
+    <div class="bug-form">
+      <form id="bugForm">
+        <div class="form-group">
+          <label><i class="fas fa-heading"></i> Título del problema</label>
+          <input type="text" id="bugTitle" placeholder="Ejemplo: El asistente IA no responde al generar esquemas" required>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-align-left"></i> Descripción detallada</label>
+          <textarea rows="3" id="bugDesc" placeholder="Describe qué ocurrió, pasos para reproducirlo y comportamiento esperado..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-exclamation-triangle"></i> Severidad</label>
+          <select id="bugSeverity">
+            <option value="baja">Baja - Cosmético / UI</option>
+            <option value="media">Media - Funcionalidad menor</option>
+            <option value="alta">Alta - Crítico / Bloqueante</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Correo (opcional)</label>
+          <input type="email" id="bugEmail" placeholder="tucorreo@estudios.com">
+        </div>
+        <button type="submit" class="btn-primary submit-bug"><i class="fas fa-paper-plane"></i> Enviar reporte</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>Estudios OS — Edición Futurista | Código abierto, ética y tecnología de vanguardia</p>
+    <div style="margin-top: 10px;">
+      <i class="fab fa-github"></i>   <i class="fab fa-twitter"></i>   <i class="fab fa-discord"></i>
+    </div>
+  </footer>
+</main>
 
 <script>
-  // ---------- SIMULACIÓN DE ESTADOS ----------
-  function updateSystemStats() {
-    const cpu = Math.floor(Math.random() * 40) + 5;
-    const ram = Math.floor(Math.random() * 35) + 15;
-    const gpu = Math.floor(Math.random() * 45) + 20;
-    document.getElementById('cpuVal').innerText = cpu+'%';
-    document.getElementById('ramVal').innerText = ram+'%';
-    document.getElementById('gpuVal').innerText = gpu+'%';
-    document.getElementById('cpuFill').style.width = cpu+'%';
-    document.getElementById('ramFill').style.width = ram+'%';
-    document.getElementById('gpuFill').style.width = gpu+'%';
-  }
-  setInterval(updateSystemStats, 4000);
-  function updateClock() {
-    const now = new Date();
-    document.getElementById('currentTime').innerHTML = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
+  // ------------------------- AI ASSISTANT (Esquema y Reporte) -------------------------
+  let conversationHistory = [];  // { role: "user" or "ai", text: "" }
 
-  // ---------- AI ASSISTANT: CHAT + EXTRACCIÓN DE TEMAS (simulación IA avanzada) ----------
-  let conversationHistory = []; // { role: "user" or "ai", text: "" }
+  const chatContainer = document.getElementById('chatContainer');
+  const chatInput = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('sendChatBtn');
+  const generateBtn = document.getElementById('generateReportBtn');
+  const reportArea = document.getElementById('reportArea');
 
-  // funciones de NLP ligero: extraer temas y subtemas desde los mensajes del usuario
-  function extractTopicsAndSubtopics(userMessagesArray) {
-    // combinamos todo el texto de usuario
-    let fullText = userMessagesArray.join(" ").toLowerCase();
-    // limpiar signos
+  // Renderizar chat
+  function renderChat() {
+    chatContainer.innerHTML = '';
+    conversationHistory.forEach(msg => {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `message ${msg.role === 'user' ? 'user' : 'ai'}`;
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.innerHTML = `<i class="${msg.role === 'ai' ? 'fas fa-robot' : 'fas fa-user-astronaut'}"></i> ${msg.text.replace(/\n/g, '<br>')}`;
+      msgDiv.appendChild(bubble);
+      chatContainer.appendChild(msgDiv);
+    });
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  // Respuesta inteligente (simula IA conversacional)
+  function getAIResponse(userMsg) {
+    const lower = userMsg.toLowerCase();
+    if (lower.includes("hola") || lower.includes("hey")) return "👋 ¡Hola! Soy Yarbis AI. Cuéntame qué temas quieres explorar para luego generar un esquema profesional.";
+    if (lower.includes("gracias")) return "¡De nada! Estoy aquí para ayudarte a organizar conocimiento. Sigue conversando o genera tu esquema.";
+    if (lower.includes("esquema") || lower.includes("reporte")) return "Perfecto, puedes usar el botón 'Generar Esquema + Reporte IA' cuando hayas compartido suficientes ideas. ¡Registraré cada concepto!";
+    if (userMsg.length > 15) {
+      let keywords = ["machine learning","IA","programación","diseño","seguridad","redes","blockchain","cloud","devops","frontend","backend","ciencia","datos"];
+      let detected = keywords.filter(k => lower.includes(k));
+      if(detected.length > 0) return `🧠 ¡Excelente! He detectado interés en: ${detected.join(", ")}. Seguiré anotando estos tópicos para el esquema. ¿Algún subtema en particular?`;
+      return `✅ Mensaje registrado. Analizaré "${userMsg.substring(0,60)}..." y lo integraré en el esquema final. ¡Continúa profundizando!`;
+    } else {
+      return "🤖 Cuéntame más detalles sobre el área que deseas esquematizar (ej: inteligencia artificial, desarrollo web, ciberseguridad, etc).";
+    }
+  }
+
+  // Extraer esquema jerárquico basado en mensajes de usuario (procesamiento ligero)
+  function extractHierarchicalScheme(userMessages) {
+    if (userMessages.length === 0) return "<p>No hay conversación previa. Escribe algunos mensajes para generar un esquema.</p>";
+    let fullText = userMessages.join(" ").toLowerCase();
+    // limpiar caracteres
     fullText = fullText.replace(/[^\w\sáéíóúüñ]/gi, ' ');
-    // palabras vacías (español/inglés)
-    const stopWords = new Set([
-      'el','la','los','las','un','una','unos','unas','y','o','pero','que','de','del','a','ante','bajo','con','contra','por','para',
-      'sobre','entre','hacia','sin','tras','durante','mediante','segun','the','and','of','to','in','for','on','with','is','are','was',
-      'this','that','these','those','from','by','at','an','be','have','has','been','will','would','could','should','etc','además'
-    ]);
-    const words = fullText.split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
-    // frecuencia
+    const stopWords = new Set(['el','la','los','las','un','una','y','o','pero','que','de','del','a','ante','bajo','con','contra','por','para','sobre','entre','hacia','sin','tras','durante','mediante','segun','the','and','of','to','in','for','on','with','is','are','was','this','that','these','those','from','by','at','an','be','have','has','been','will','would','could','should','etc','además']);
+    let words = fullText.split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
     let freq = {};
     words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
     let sorted = Object.entries(freq).sort((a,b)=>b[1]-a[1]);
     let mainTopics = sorted.slice(0,5).map(item => item[0]);
-    if(mainTopics.length === 0) mainTopics = ["temas generales", "conversación productiva"];
+    if (mainTopics.length === 0) mainTopics = ["innovación", "tecnología", "productividad"];
     
-    // Construir esquema jerárquico buscando frases clave relacionadas en cada mensaje
-    let schemeHTML = `<ul style="margin:0;">`;
+    let schemeHtml = `<ul style="margin:0 0 12px 0;">`;
     for (let topic of mainTopics) {
-      schemeHTML += `<li><strong>${capitalize(topic)}</strong><ul>`;
-      // buscar subtópicos basados en co-ocurrencia en mensajes
-      let related = new Set();
-      for (let msg of userMessagesArray) {
-        if(msg.toLowerCase().includes(topic) && msg.length > topic.length+5) {
-          // extraer frases cortas como subtemas
-          let sentences = msg.split(/[.,;?!]/);
-          for(let sent of sentences) {
-            if(sent.toLowerCase().includes(topic) && sent.trim().length < 100 && sent.trim().length > 8) {
-              let sub = sent.trim().substring(0, 70);
-              if(sub.length > 5) related.add(sub);
-            } else if(sent.trim().length > 12 && !stopWords.has(sent.split(' ')[0])) {
-              // posible subtema contextual
-              let shortPhrase = sent.trim().slice(0, 60);
-              if(shortPhrase.length > 8) related.add(shortPhrase);
+      schemeHtml += `<li><strong>${capitalize(topic)}</strong><ul>`;
+      // buscar subtemas a partir de frases donde aparezca el tópico
+      let subSet = new Set();
+      for (let msg of userMessages) {
+        let lowerMsg = msg.toLowerCase();
+        if (lowerMsg.includes(topic) && msg.length > topic.length+6) {
+          let fragments = msg.split(/[.,;?!]/);
+          for (let frag of fragments) {
+            if (frag.toLowerCase().includes(topic) && frag.trim().length > 10 && frag.trim().length < 100) {
+              subSet.add(frag.trim());
             }
           }
         }
       }
-      let relatedArr = Array.from(related).slice(0, 4);
-      if(relatedArr.length === 0) relatedArr = [`Profundización en ${topic}`, "Análisis detallado", "Aplicaciones prácticas"];
-      for(let subt of relatedArr) {
-        schemeHTML += `<li>📌 ${subt.substring(0,80)}</li>`;
+      let subList = Array.from(subSet);
+      if (subList.length === 0) subList = [`Profundización en ${topic}`, "Aplicaciones prácticas", "Casos de uso relevantes"];
+      for (let sub of subList.slice(0,3)) {
+        schemeHtml += `<li>📌 ${sub.substring(0,80)}</li>`;
       }
-      schemeHTML += `</ul></li>`;
+      schemeHtml += `</ul></li>`;
     }
-    schemeHTML += `</ul>`;
-    // Si hay multiples matices agregar sección de temas emergentes
-    if(mainTopics.length > 2) {
-      schemeHTML += `<div style="margin-top:8px;"><span class="badge"><i class="fas fa-chart-line"></i> Palabras clave:</span> ${mainTopics.slice(0,4).join(', ')}</div>`;
-    }
-    return schemeHTML;
+    schemeHtml += `</ul>`;
+    if (mainTopics.length > 2) schemeHtml += `<div class="badge" style="margin-top:8px;"><i class="fas fa-chart-line"></i> Temas centrales: ${mainTopics.slice(0,4).join(', ')}</div>`;
+    return schemeHtml;
   }
 
-  function generateReport(userMessagesArray) {
-    if(userMessagesArray.length === 0) return "No hay conversación aún. Escribe sobre temas para generar reporte.";
-    let fullConversation = userMessagesArray.join(" ");
-    let wordCount = fullConversation.split(/\s+/).length;
-    let topicsExt = [];
-    const wordsLower = fullConversation.toLowerCase();
-    const topicIndicators = ["aprender", "estudio", "proyecto", "desarrollo", "inteligencia artificial", "machine learning", "datos", "backend", "frontend", "seguridad", "redes", "kernel", "linux", "programación", "diseño", "futuro", "investigación"];
-    let foundTopics = topicIndicators.filter(t => wordsLower.includes(t));
-    if(foundTopics.length === 0) foundTopics = ["temas técnicos", "colaboración", "innovación"];
-    let summary = `📊 **Reporte Generado por IA**\n\n✅ Resumen: Se analizaron ${userMessagesArray.length} intervenciones (${wordCount} palabras aprox). Principales ejes: ${foundTopics.slice(0,4).join(", ")}.\n\n✨ Recomendaciones: `;
-    let rec = "Organizar sesiones de estudio basadas en los temas extraídos. Utilizar el esquema para crear rutas de aprendizaje. Revisar conceptos clave y aplicar ejercicios prácticos.";
-    if(foundTopics.includes("inteligencia artificial") || foundTopics.includes("machine learning")) rec = "Priorizar fundamentos de redes neuronales, datasets y frameworks. Revisar bias y ética en IA.";
-    else if(foundTopics.includes("programación")) rec = "Practicar con ejercicios de algoritmos, estructuras de datos y proyectos modulares.";
-    else if(foundTopics.includes("linux") || foundTopics.includes("kernel")) rec = "Explorar configuración del kernel, scripts bash y administración de sistemas.";
-    let conclusion = `📌 Conclusión: La conversación refleja interés en ${foundTopics.join(", ")}. Se recomienda profundizar con documentación oficial y laboratorios interactivos. El asistente seguirá disponible para expandir esquemas.`;
-    return `<div><i class="fas fa-file-alt"></i> <strong>Informe Ejecutivo</strong><br>${summary}<br>📌 ${rec}<br><br>${conclusion}</div>`;
+  function generateDetailedReport(userMessages) {
+    if (userMessages.length === 0) return "No hay suficiente conversación. Empieza a hablar con Yarbis AI para generar un reporte personalizado.";
+    let totalWords = userMessages.join(" ").split(/\s+/).length;
+    let topicsDetected = [];
+    const topicPool = ["machine learning", "desarrollo web", "backend", "frontend", "ciberseguridad", "redes", "devops", "cloud computing", "bases de datos", "inteligencia artificial", "diseño UI/UX", "filosofía", "educación", "investigación"];
+    let fullLower = userMessages.join(" ").toLowerCase();
+    for (let t of topicPool) {
+      if (fullLower.includes(t)) topicsDetected.push(t);
+    }
+    if (topicsDetected.length === 0) topicsDetected = ["temas emergentes", "colaboración", "aprendizaje autodirigido"];
+    let recommendations = "";
+    if (topicsDetected.some(t => t.includes("machine") || t.includes("inteligencia"))) recommendations = "Se recomienda explorar frameworks como TensorFlow, PyTorch y revisar ética en IA.";
+    else if (topicsDetected.some(t => t.includes("web") || t.includes("frontend"))) recommendations = "Enfócate en React, Vue o Astro. Realiza proyectos progresivos.";
+    else if (topicsDetected.some(t => t.includes("seguridad"))) recommendations = "Profundiza en cifrado, OWASP y hardening de sistemas.";
+    else recommendations = "Organiza sesiones prácticas basadas en los temas del esquema. Usa documentación oficial y laboratorios interactivos.";
+    
+    return `<div><i class="fas fa-file-signature"></i> <strong>📋 Informe generado por Yarbis AI</strong><br><br>
+    ✅ Resumen: Se analizaron ${userMessages.length} mensajes (${totalWords} palabras).<br>
+    🔍 Áreas detectadas: ${topicsDetected.slice(0,5).join(", ")}.<br>
+    💡 Recomendación principal: ${recommendations}<br><br>
+    📌 Conclusión: El diálogo refleja interés genuino en ${topicsDetected.slice(0,3).join(" y ")}. Se sugiere crear un plan de estudio usando el esquema jerárquico generado. El asistente puede seguir afinando conceptos.</div>`;
   }
 
   function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-  // actualizar UI del chat
-  function renderChat() {
-    const chatDiv = document.getElementById('chatContainer');
-    chatDiv.innerHTML = '';
-    conversationHistory.forEach(msg => {
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `message ${msg.role === 'user' ? 'user' : 'ai'}`;
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.innerHTML = `<i class="${msg.role === 'ai' ? 'fas fa-robot' : 'fas fa-user'}"></i> ${msg.text}`;
-      msgDiv.appendChild(bubble);
-      chatDiv.appendChild(msgDiv);
-    });
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-  }
-
-  // respuesta simulada pero inteligente del AI, reconoce temas y promueve generación
-  function getAIResponse(userMessage) {
-    const lowerMsg = userMessage.toLowerCase();
-    let response = "";
-    if(lowerMsg.includes("hola") || lowerMsg.includes("buenas")) response = "👋 ¡Hola! Soy tu IA de Estudios. Cuéntame qué temas te interesan para luego generar un esquema organizado y reporte detallado.";
-    else if(lowerMsg.includes("esquema") || lowerMsg.includes("reporte")) response = "✅ Puedes usar el botón 'Generar Esquema y Reporte IA' cuando hayas conversado suficiente. Yo registraré los temas y subtemas clave.";
-    else if(lowerMsg.length > 10) {
-      let detected = [];
-      const keywords = ["ia", "machine learning", "redes", "seguridad", "programación", "python", "javascript", "base de datos", "cloud", "devops", "ui/ux", "futuro", "blockchain"];
-      for(let kw of keywords) {
-        if(lowerMsg.includes(kw)) detected.push(kw);
-      }
-      if(detected.length) response = `📌 He registrado tus comentarios sobre: ${detected.join(", ")}. ¡Excelente! Puedes profundizar o añadir más conceptos. Luego generaré un esquema enriquecido y reporte personalizado.`;
-      else response = `🧠 Perfecto, he analizado tu mensaje. Se agregará al contexto para el esquema. Hablamos sobre: "${userMessage.substring(0,70)}...". ¡Continúa! Cuando quieras, presiona el botón "Generar Esquema y Reporte".`;
-    } else {
-      response = "🤖 Cuéntame más detalles sobre los temas que te gustaría esquematizar. Pueden ser académicos, tecnológicos o de investigación. ¡Estoy aquí para ayudarte!";
-    }
-    return response;
-  }
-
-  // Enviar mensaje
   function sendUserMessage() {
-    const input = document.getElementById('chatInput');
-    const text = input.value.trim();
-    if(text === "") return;
-    // agregar mensaje usuario
+    const text = chatInput.value.trim();
+    if (text === "") return;
     conversationHistory.push({ role: "user", text: text });
     renderChat();
-    input.value = "";
-    // Simular respuesta IA (delay para realismo)
+    chatInput.value = "";
+    // respuesta demorada
     setTimeout(() => {
       const aiReply = getAIResponse(text);
       conversationHistory.push({ role: "ai", text: aiReply });
@@ -623,40 +560,61 @@
     }, 300);
   }
 
-  // GENERAR ESQUEMA Y REPORTE final basado en conversación (solo mensajes de usuario)
   function generateSchemeAndReport() {
-    const userMessages = conversationHistory.filter(msg => msg.role === "user").map(msg => msg.text);
-    if(userMessages.length === 0) {
-      document.getElementById('schemeReportArea').innerHTML = `<div style="color:#ffaa66;"><i class="fas fa-exclamation-triangle"></i> No hay temas discutidos aún. Escribe algunos mensajes sobre lo que quieras esquematizar.</div>`;
+    const userMessages = conversationHistory.filter(m => m.role === "user").map(m => m.text);
+    if (userMessages.length === 0) {
+      reportArea.innerHTML = `<div style="color: #ffaa88;"><i class="fas fa-comment-slash"></i> Aún no hay mensajes. Escribe algo para que la IA analice los temas.</div>`;
       return;
     }
-    const schemeHtml = extractTopicsAndSubtopics(userMessages);
-    const reportHtml = generateReport(userMessages);
-    const finalHtml = `
-      <h4><i class="fas fa-diagram-project"></i> ESQUEMA DE TEMAS DISCUTIDOS</h4>
+    const schemeHtml = extractHierarchicalScheme(userMessages);
+    const reportHtml = generateDetailedReport(userMessages);
+    reportArea.innerHTML = `
+      <h4><i class="fas fa-diagram-project"></i> ESQUEMA JERÁRQUICO (temas clave)</h4>
       ${schemeHtml}
-      <hr>
+      <hr style="margin: 16px 0; border-color: cyan;">
+      <h4><i class="fas fa-clipboard-list"></i> REPORTE EJECUTIVO</h4>
       ${reportHtml}
-      <div style="margin-top:10px; font-size:0.7rem; text-align:right;"><i class="fas fa-microchip"></i> IA generativa · Estudios OS</div>
+      <div style="font-size:0.7rem; text-align:right; margin-top: 12px;"><i class="fas fa-microchip"></i> IA Yarbis · Estudios OS</div>
     `;
-    document.getElementById('schemeReportArea').innerHTML = finalHtml;
   }
 
-  // Eventos
-  document.getElementById('sendMsgBtn').addEventListener('click', sendUserMessage);
-  document.getElementById('chatInput').addEventListener('keypress', (e) => {
-    if(e.key === 'Enter') sendUserMessage();
-  });
-  document.getElementById('generateReportBtn').addEventListener('click', generateSchemeAndReport);
-  
+  sendBtn.addEventListener('click', sendUserMessage);
+  chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendUserMessage(); });
+  generateBtn.addEventListener('click', generateSchemeAndReport);
+
   // Mensaje de bienvenida inicial
   setTimeout(() => {
-    if(conversationHistory.length === 0) {
-      const welcomeMsg = "✨ Bienvenido a Estudios OS futurista. Soy tu asistente IA. Conversemos sobre cualquier tema (programación, ciencia, diseño, filosofía, etc.) y después podré generar un esquema conceptual y un reporte con recomendaciones. ¿Por qué tema empezamos?";
-      conversationHistory.push({ role: "ai", text: welcomeMsg });
+    if (conversationHistory.length === 0) {
+      const welcome = "✨ Bienvenido a Estudios OS. Soy tu IA Yarbis. Cuéntame sobre tus áreas de interés (programación, ciencia, diseño, etc.) y al final podré generar un esquema profesional y un reporte detallado para tu estudio o proyecto. ¿Por qué tema empezamos?";
+      conversationHistory.push({ role: "ai", text: welcome });
       renderChat();
     }
-  }, 200);
+  }, 300);
+
+  // ------------------------- BUG REPORT FORM (simulación) -------------------------
+  const bugForm = document.getElementById('bugForm');
+  function showToast(message, isError = false) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+    toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+  }
+
+  bugForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('bugTitle').value.trim();
+    const desc = document.getElementById('bugDesc').value.trim();
+    const severity = document.getElementById('bugSeverity').value;
+    if (!title || !desc) {
+      showToast("❌ Por favor completa título y descripción del fallo.", true);
+      return;
+    }
+    // Simular envío
+    console.log({ title, desc, severity, email: document.getElementById('bugEmail').value });
+    showToast("✅ Reporte enviado al equipo de Estudios OS. ¡Gracias por contribuir!");
+    bugForm.reset();
+  });
 </script>
 </body>
 </html>
